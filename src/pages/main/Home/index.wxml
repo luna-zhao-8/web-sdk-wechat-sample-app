@@ -1,0 +1,5 @@
+<view>hello</view>
+<view bind:tap="searchToothbrush">
+</view>
+<panel/>
+<grid />

@@ -1,0 +1,12 @@
+{
+  "darkmode": false,
+  "pages": ["pages/main/Home/index"],
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 5000
+  },
+  "window": {
+    "navigationBarTitleText": "Kolibree SDK Demo"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "panel": "/components/Panel/index",
+    "grid": "/components/Grid/index"
+  }
+}
