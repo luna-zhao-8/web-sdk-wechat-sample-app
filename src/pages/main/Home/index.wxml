@@ -1,5 +1,56 @@
-<view>hello</view>
-<view bind:tap="searchToothbrush">
+<view class="account">
+  <button bind:tap="signIn" size="mini">Sign In</button>
+  <button bind:tap="signOut" size="mini">Sign Out</button>
 </view>
-<panel/>
-<grid />
+
+<view class="profiles">
+  <view class="subtitle">Profiles:</view>
+  <view class="item" wx:for="{{ profiles }}" >
+    <view>Name: {{ item.name }}</view>
+    <view>
+      <button
+        wx:if="{{ item.ownerProfile }}"
+        size="mini"
+        data-id="{{ item.id }}"
+        bind:tap="handleUpdateProfileName"
+      >
+        update name
+      </button>
+      <button
+        wx:if="{{ !item.ownerProfile }}"
+        size="mini"
+        data-id="{{ item.id }}"
+        bind:tap="handleDeleteProfile"
+      >
+        delete
+      </button>
+    </view>
+  </view>
+</view>
+
+<view>
+  <view class="subtitle">new profile info: </view>
+  <view class="new-profile">
+    <view>
+      <view>name: Luc</view>
+      <view>gender: M</view>
+      <view>age range: -15 </view>
+    </view>
+    <view>
+      <button size="mini" bind:tap="createProfile">create profile</button>
+    </view>
+  </view>
+</view>
+
+<view class="activities">
+  <view class="subtitle">Brushing Activities</view>
+  <view>
+    <button size="mini">Guideding brushing</button>
+    <button size="mini">Test brushing</button>
+    <button size="mini">Mind your speed</button>
+    <button size="mini">Test your angles</button>
+  </view>
+</view>
+
+
+<view bind:tap="searchToothbrush"></view>

@@ -1,0 +1,24 @@
+page {
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.profiles {
+  padding: 20rpx 0;
+}
+
+.subtitle {
+  padding-top: 30rpx;
+  margin-bottom: 30rpx;
+  font-weight: bold;
+}
+
+.profiles .item {
+  display: flex;
+  justify-content: space-between;
+} 
+
+.new-profile {
+  display: flex;
+  justify-content: space-between;
+}
