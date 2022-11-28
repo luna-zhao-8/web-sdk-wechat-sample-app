@@ -1,9 +1,63 @@
-<view class="title">Click to Search Brushes</view>
+<view class="account">
+  <button bind:tap="signIn" size="mini">Sign In</button>
+  <button bind:tap="signOut" size="mini">Sign Out</button>
+</view>
+
+<view class="profiles">
+  <view class="subtitle">Profiles:</view>
+  <view class="item" wx:for="{{ profiles }}" >
+    <view>Name: {{ item.name }}</view>
+    <view>
+      <button
+        wx:if="{{ item.ownerProfile }}"
+        size="mini"
+        data-id="{{ item.id }}"
+        bind:tap="handleUpdateProfileName"
+      >
+        update name
+      </button>
+      <button
+        wx:if="{{ !item.ownerProfile }}"
+        size="mini"
+        data-id="{{ item.id }}"
+        bind:tap="handleDeleteProfile"
+      >
+        delete
+      </button>
+    </view>
+  </view>
+</view>
+
+<view>
+  <view class="subtitle">new profile info: </view>
+  <view class="new-profile">
+    <view>
+      <view>name: Luc</view>
+      <view>gender: M</view>
+      <view>age range: -15 </view>
+    </view>
+    <view>
+      <button size="mini" bind:tap="createProfile">create profile</button>
+    </view>
+  </view>
+</view>
+
+<view class="activities">
+  <view class="subtitle">Brushing Activities</view>
+  <view>
+    <button size="mini">Guideding brushing</button>
+    <button size="mini">Test brushing</button>
+    <button size="mini">Mind your speed</button>
+    <button size="mini">Test your angles</button>
+  </view>
+</view>
+
+<view class="section-title">Click to Search Brushes</view>
 <button bind:tap="searchToothbrush">Search Brushes</button>
 
 <block wx:if="{{toothbrushes.length > 0 }}">
-  <view class="title">Please choose the device you want to connect</view>
-  <block wx:for="{{toothbrushes}}" wx:key="item">
+  <view class="section-title">Please choose the device you want to connect</view>
+  <block wx:for="{{toothbrushes}}" wx:key="item" class="toothbrushes">
     <view class="item">
       <view class="info">
         <view class="name">{{ item.deviceName }}</view>
@@ -17,18 +71,26 @@
 <view>Connection Status: {{ connectionStatus }}</view>
 <view>Device Name: {{ deviceName }}</view>
 
-<view class="title">Click to get Serial Number</view>
-<button bind:tap="getSerialNumber">get Serial Number</button>
-<view>Serial Number: {{ serialNumber }}</view>
+<view>
+  <view class="section-title">Click to get Serial Number</view>
+  <button class="btn" bind:tap="getSerialNumber">get Serial Number</button>
+  <view>Serial Number: {{ serialNumber }}</view>
+</view>
 
-<view class="title">Click to get Battery Info</view>
-<button bind:tap="getBatteryInfo">get Battery Info</button>
-<view>Battery Level: {{ batteryInfo.batteryLevel }}%</view>
+<view>
+  <view class="section-title">Click to get Battery Info</view>
+  <button class="btn" bind:tap="getBatteryInfo">get Battery Info</button>
+  <view>Battery Level: {{ batteryInfo.batteryLevel }}%</view>
+</view>
 
-<view class="title">Pay attention to your toothbrush after clicking the button</view>
-<button bind:tap="toggleVibrator">Toggle Vibrator</button>
+<view>
+  <view class="section-title">Pay attention to your toothbrush after clicking the button</view>
+  <button class="btn" bind:tap="toggleVibrator">Toggle Vibrator</button>
+</view>
 
-<view class="title">Press the power button on your toothbrush, then click the button below</view>
-<view>Note: This allows you to set another mode, kindly check the lighting indicator of your toothbrush.</view>
-<button class="bottom" bind:tap="setBrushingMode">set Brushing Mode</button>
+<view>
+  <view class="section-title">Press the power button on your toothbrush, then click the button below</view>
+  <view>Note: This allows you to set another mode, kindly check the lighting indicator of your toothbrush.</view>
+  <button class="btn brushing-mode" bind:tap="setBrushingMode">set Brushing Mode</button>
+</view>
 

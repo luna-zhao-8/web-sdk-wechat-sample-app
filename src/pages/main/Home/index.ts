@@ -1,23 +1,57 @@
 import {
   findToothbrushes,
   stopFindingToothbrushes,
-  DefaultToothbrushWrapper, BrushingMode,
+  DefaultToothbrushWrapper, BrushingMode, DeviceShadow,
 } from '@kolibree/toothbrush-client';
+import {Account, AccountDetail, Gender, Profile, ProfilesEntity} from '@kolibree/api-client';
 import { createToothbrushWrapperFromDeviceId } from "@kolibree/toothbrush-client/lib/device-wrappers";
-import {getToothbrushWrapper} from "@kolibree/toothbrush-client/lib/device-registry";
+import { getToothbrushWrapper } from "@kolibree/toothbrush-client/lib/device-registry";
 
-Page({
+type State = {
+  toothbrushes: { deviceId: string, deviceName: string }[],
+  connectionStatus: string,
+  deviceName: string,
+  deviceId: string,
+  batteryInfo: { batteryLevel: number },
+  serialNumber: string,
+  brushingMode: string,
+  vibrating: boolean,
+  profiles: { id: number; name: string; ownerProfile: boolean }[],
+}
+
+type Methods = {
+  searchToothbrush(): void;
+  stopSearchingToothbrush(): void;
+  handleConnect(e: WechatMiniprogram.BaseEvent<{ id: number, name: string }>): void;
+  getSerialNumber(): void;
+  setBrushingMode(): void;
+  getBatteryInfo(): void;
+  toggleVibrator(): void;
+  signIn(): void;
+  signOut(): void;
+  createProfile(): void;
+  handleUpdateProfileName(e: WechatMiniprogram.BaseEvent<{ id: number }>): void;
+  handleDeleteProfile(e: WechatMiniprogram.BaseEvent<{ id: number }>): void;
+  deviceShadowList: DeviceShadow[];
+}
+
+Page<State, Methods>({
   deviceShadowList: [],
   data: {
-    toothbrushes: [],
-    connectionStatus: 'disconnected',
-    deviceName: '',
-    deviceId: '',
-    batteryInfo: { batteryLevel: 0 },
-    serialNumber: '',
-    brushingMode: 'clean',
-    vibrating: false,
+      toothbrushes: [] as State['toothbrushes'],
+      connectionStatus: 'disconnected',
+      deviceName: '',
+      deviceId: '',
+      batteryInfo: { batteryLevel: 0 },
+      serialNumber: '',
+      brushingMode: 'clean',
+      vibrating: false,
+      profiles: [
+      { id: 12, name: 'user1', ownerProfile: true },
+      { id: 16, name: 'user2', ownerProfile: false },
+    ],
   },
+
   onLoad(){
     console.log('hello here');
   },
@@ -43,7 +77,6 @@ Page({
 
   stopSearchingToothbrush() {
     stopFindingToothbrushes();
-    console.log('stop finding toothbrushes');
   },
 
   handleConnect({currentTarget: {dataset: { id, name }}}) {
@@ -108,4 +141,63 @@ Page({
       })
     }
   },
+
+  signIn() {
+    wx.login().then((res) => {
+      Account.signInWithWechat(res.code).then((account: AccountDetail) => {
+        console.log('account info: ', account);
+        this.setData({
+          profiles: profilesSelector(account)
+        })
+      })
+    })
+  },
+  signOut() {
+    Account.logout().then(() => {
+      this.setData({
+        profiles: [],
+      })
+    });
+  },
+  createProfile() {
+    Profile.createProfile({ first_name: 'Luc', age_bracket: '-15', gender: Gender.MALE }).then((result) => {
+      this.setData({
+        profiles: this.data.profiles.concat(profileSelector(result))
+      })
+    })
+  },
+  handleUpdateProfileName(event) {
+    const { currentTarget: { dataset: { id } } } = event;
+    Profile.updateProfile({ first_name: 'God', profile_id: id })
+      .then(() => Account.fetchAccount())
+      .then((account) => profilesSelector(account))
+      .then((profiles) => {
+        this.setData({
+          profiles,
+        });
+      })
+  },
+  handleDeleteProfile(event) {
+    const { currentTarget: { dataset: { id } } } = event;
+    Profile.deleteProfileById(id)
+      .then(() => Account.fetchAccount())
+      .then((account) => profilesSelector(account))
+      .then((profiles) => {
+        this.setData({
+          profiles,
+        });
+      })
+  }
 });
+
+function profilesSelector(account: AccountDetail) {
+  return account.profiles.map(profileSelector)
+}
+
+function profileSelector(profile: ProfilesEntity) {
+  return {
+    id: profile.id,
+    ownerProfile: profile.is_owner_profile,
+    name: profile.first_name,
+  }
+}

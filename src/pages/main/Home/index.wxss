@@ -1,24 +1,48 @@
-.title {
-  margin: 0 auto;
-  font-weight: bold;
-  margin: 30rpx 0;
+page {
+  padding: 20rpx;
+  box-sizing: border-box;
 }
 
-.item {
+.profiles {
+  padding: 20rpx 0;
+}
+
+.subtitle {
+  padding-top: 30rpx;
+  margin-bottom: 30rpx;
+  font-weight: bold;
+}
+
+.profiles .item {
+  display: flex;
+  justify-content: space-between;
+} 
+
+.new-profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-title {
+  margin: 30rpx auto;
+  font-weight: bold;
+}
+
+.toothbrushes .item {
   display: flex;
   justify-content: space-around;
 }
 
-.info {
+.toothbrushes .info {
   margin-bottom: 30rpx;
 }
 
-button {
+.btn {
   height: 100rpx;
   width: 50%;
   margin-bottom: 30rpx;
 }
 
-.bottom {
+.brushing-mode {
   margin-bottom: 30rpx;
 }
