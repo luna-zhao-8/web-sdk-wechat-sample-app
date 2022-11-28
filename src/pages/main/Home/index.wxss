@@ -22,3 +22,27 @@ page {
   display: flex;
   justify-content: space-between;
 }
+
+.section-title {
+  margin: 30rpx auto;
+  font-weight: bold;
+}
+
+.toothbrushes .item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.toothbrushes .info {
+  margin-bottom: 30rpx;
+}
+
+.btn {
+  height: 100rpx;
+  width: 50%;
+  margin-bottom: 30rpx;
+}
+
+.brushing-mode {
+  margin-bottom: 30rpx;
+}
