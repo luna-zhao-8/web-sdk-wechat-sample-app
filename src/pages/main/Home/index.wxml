@@ -1,5 +1,34 @@
-<view>hello</view>
-<view bind:tap="searchToothbrush">
-</view>
-<panel/>
-<grid />
+<view class="title">Click to Search Brushes</view>
+<button bind:tap="searchToothbrush">Search Brushes</button>
+
+<block wx:if="{{toothbrushes.length > 0 }}">
+  <view class="title">Please choose the device you want to connect</view>
+  <block wx:for="{{toothbrushes}}" wx:key="item">
+    <view class="item">
+      <view class="info">
+        <view class="name">{{ item.deviceName }}</view>
+      </view>
+      <view class="actions">
+        <view data-name="{{ item.deviceName }}" data-id="{{ item.deviceId }}" bind:tap="handleConnect">Connect</view>
+      </view>
+    </view>
+  </block>
+</block>
+<view>Connection Status: {{ connectionStatus }}</view>
+<view>Device Name: {{ deviceName }}</view>
+
+<view class="title">Click to get Serial Number</view>
+<button bind:tap="getSerialNumber">get Serial Number</button>
+<view>Serial Number: {{ serialNumber }}</view>
+
+<view class="title">Click to get Battery Info</view>
+<button bind:tap="getBatteryInfo">get Battery Info</button>
+<view>Battery Level: {{ batteryInfo.batteryLevel }}%</view>
+
+<view class="title">Pay attention to your toothbrush after clicking the button</view>
+<button bind:tap="toggleVibrator">Toggle Vibrator</button>
+
+<view class="title">Press the power button on your toothbrush, then click the button below</view>
+<view>Note: This allows you to set another mode, kindly check the lighting indicator of your toothbrush.</view>
+<button class="bottom" bind:tap="setBrushingMode">set Brushing Mode</button>
+

@@ -1,0 +1,24 @@
+.title {
+  margin: 0 auto;
+  font-weight: bold;
+  margin: 30rpx 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.info {
+  margin-bottom: 30rpx;
+}
+
+button {
+  height: 100rpx;
+  width: 50%;
+  margin-bottom: 30rpx;
+}
+
+.bottom {
+  margin-bottom: 30rpx;
+}
