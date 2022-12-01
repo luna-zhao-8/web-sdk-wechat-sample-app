@@ -1,0 +1,3 @@
+<mind-your-speed-summary>
+  <kl-button type="primary" bind:tap="navigateToHome">Home</kl-button>
+</mind-your-speed-summary>

@@ -24,4 +24,5 @@ App({
   },
   onError(msg) {
   },
+  global: {}
 });

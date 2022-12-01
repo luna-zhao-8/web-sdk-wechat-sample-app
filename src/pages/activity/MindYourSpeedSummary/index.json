@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mind-your-speed-summary": "@kolibree/mind-your-speed-wechat-mini/components/mind-your-speed-summary/index",
+    "kl-button": "@kolibree/ui-components-wechat-mini/components/kl-button/index"
+  }
+}

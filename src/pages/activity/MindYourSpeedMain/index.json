@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "mind-your-speed": "@kolibree/mind-your-speed-wechat-mini/components/mind-your-speed-index/index"
+  }
+}

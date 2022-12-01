@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "test-brushing-welcome": "@kolibree/test-brushing-wechat-mini/components/test-brushing-welcome/index"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,6 +1,25 @@
 {
   "darkmode": false,
   "pages": ["pages/main/Home/index"],
+  "subpackages": [
+    {
+      "root": "pages/activity",
+      "name": "Activity",
+      "pages": [
+        "TestYourAnglesWelcome/index",
+        "TestYourAnglesMain/index",
+        "TestYourAnglesSummary/index",
+        "TestBrushingWelcome/index",
+        "TestBrushingMain/index",
+        "TestBrushingResult/index",
+        "MindYourSpeedWelcome/index",
+        "MindYourSpeedMain/index",
+        "MindYourSpeedSummary/index",
+        "GuidedBrushingMain/index",
+        "GuidedBrushingResult/index"
+      ]
+    }
+  ],
   "networkTimeout": {
     "request": 10000,
     "connectSocket": 5000

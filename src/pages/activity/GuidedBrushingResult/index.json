@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "your-results": "@kolibree/guided-brushing-wechat-mini/components/guided-brushing-results/index",
+    "kl-button": "@kolibree/ui-components-wechat-mini/components/kl-button/index"
+  }
+}

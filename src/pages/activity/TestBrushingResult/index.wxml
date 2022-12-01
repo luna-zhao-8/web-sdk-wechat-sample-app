@@ -1,0 +1,3 @@
+<test-brushing-result checkupResponse="{{ checkup }}">
+  <kl-button bind:tap="navToHome" type="primary">Home</kl-button>
+</test-brushing-result>

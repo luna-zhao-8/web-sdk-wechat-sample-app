@@ -13,7 +13,7 @@
     "clean": "rm -rf dist/"
   },
   "devDependencies": {
-    "@kolibree/minipack": "^1.0.8",
+    "@kolibree/minipack": "^1.0.10-1",
     "miniprogram-api-typings": "^3.6.0",
     "typescript": "4.2.3"
   },
@@ -22,13 +22,20 @@
     "@kolibree/ble-core": "^0.1.4",
     "@kolibree/ble-wechat-mini": "^0.1.8",
     "@kolibree/brushing-activity-utils": "^1.0.3",
+    "@kolibree/guided-brushing-wechat-mini": "^0.1.0",
+    "@kolibree/i18n": "^0.1.3",
     "@kolibree/jaw-wechat": "^0.2.2",
-    "@kolibree/kml": "^0.1.2",
+    "@kolibree/kml": "^0.1.3",
     "@kolibree/local-storage": "^0.1.3",
+    "@kolibree/mind-your-speed-wechat-mini": "^0.1.0",
+    "@kolibree/test-brushing-wechat-mini": "^0.1.0",
+    "@kolibree/test-your-angles-wechat-mini": "^0.1.0",
     "@kolibree/three-on-wechat": "^0.2.0",
     "@kolibree/toothbrush-client": "^1.0.3",
+    "@kolibree/ui-components-wechat-mini": "^0.1.1",
     "@kolibree/websocket-client": "^0.1.9",
     "bytebuffer": "^5.0.1",
+    "lottie-miniprogram": "^1.0.12",
     "rxjs": "^6.6.7",
     "tslib": "^2.4.1"
   }

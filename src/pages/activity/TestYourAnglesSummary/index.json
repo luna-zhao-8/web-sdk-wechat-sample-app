@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "test-your-angles-summary": "@kolibree/test-your-angles-wechat-mini/components/test-your-angles-summary/index",
+    "kl-button": "@kolibree/ui-components-wechat-mini/components/kl-button/index"
+  }
+}

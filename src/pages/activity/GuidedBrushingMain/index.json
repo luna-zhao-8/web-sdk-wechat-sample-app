@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "guided-brushing": "@kolibree/guided-brushing-wechat-mini/components/guided-brushing-index/index"
+  }
+}
