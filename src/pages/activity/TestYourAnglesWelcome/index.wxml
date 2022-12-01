@@ -1,0 +1,4 @@
+<test-your-angles-welcome
+  bind:testYourAnglesStart ="handleStartActivity"
+  bind:testYourAnglesCancel ="handleCancelActivity"
+/>

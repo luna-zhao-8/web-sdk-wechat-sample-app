@@ -1,155 +1,239 @@
 import {
+  createToothbrushWrapper,
+  createToothbrushWrapperFromDeviceId,
+  DefaultToothbrushWrapper,
+  DeviceShadow, deviceUpdateManager,
   findToothbrushes,
+  getToothbrushWrapper,
   stopFindingToothbrushes,
-  DefaultToothbrushWrapper, BrushingMode, DeviceShadow,
+  ToothbrushModelId,
 } from '@kolibree/toothbrush-client';
-import {Account, AccountDetail, Gender, Profile, ProfilesEntity} from '@kolibree/api-client';
-import { createToothbrushWrapperFromDeviceId } from "@kolibree/toothbrush-client/lib/device-wrappers";
-import { getToothbrushWrapper } from "@kolibree/toothbrush-client/lib/device-registry";
+import { Account, AccountDetail, Gender, Profile, ProfilesEntity } from '@kolibree/api-client';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { getGlobalData, setGlobalData } from '../../../utils/global';
+import ButtonGetPhoneNumber = WechatMiniprogram.ButtonGetPhoneNumber;
 
 type State = {
-  toothbrushes: { deviceId: string, deviceName: string }[],
-  connectionStatus: string,
-  deviceName: string,
-  deviceId: string,
-  batteryInfo: { batteryLevel: number },
-  serialNumber: string,
-  brushingMode: string,
-  vibrating: boolean,
-  profiles: { id: number; name: string; ownerProfile: boolean }[],
+  toothbrushList: { deviceId: string, deviceName: string }[];
+  toothbrush: {
+    connectionStatus: string;
+    deviceName: string;
+    deviceId: string;
+    batteryLevel: number;
+    serialNumber: string;
+    vibrating: boolean;
+    firmwareUpdateAvailable: boolean;
+  },
+  accountId: number;
+  profiles: { id: number; name: string; ownerProfile: boolean }[];
+  token: string;
 }
 
 type Methods = {
   searchToothbrush(): void;
-  stopSearchingToothbrush(): void;
   handleConnect(e: WechatMiniprogram.BaseEvent<{ id: number, name: string }>): void;
   getSerialNumber(): void;
-  setBrushingMode(): void;
   getBatteryInfo(): void;
   toggleVibrator(): void;
-  signIn(): void;
+  signIn(e: WechatMiniprogram.ButtonGetPhoneNumber): void;
   signOut(): void;
   createProfile(): void;
   handleUpdateProfileName(e: WechatMiniprogram.BaseEvent<{ id: number }>): void;
   handleDeleteProfile(e: WechatMiniprogram.BaseEvent<{ id: number }>): void;
+  navigateToGuidedBrushing(): void;
+  navigateToTestYourAngles(): void;
+  navigateToMindYourSpeed(): void;
+  navigateToTestBrushing(): void;
+  startOTAUpdate(): void;
+  checkOTAUpdate(): void;
   deviceShadowList: DeviceShadow[];
+  circuitBreaker$: Subject<any>;
 }
 
 Page<State, Methods>({
   deviceShadowList: [],
+  circuitBreaker$: null,
   data: {
-      toothbrushes: [] as State['toothbrushes'],
+    accountId: null,
+    toothbrushList: [] as State['toothbrushList'],
+    toothbrush: {
       connectionStatus: 'disconnected',
       deviceName: '',
       deviceId: '',
-      batteryInfo: { batteryLevel: 0 },
+      batteryLevel: 0,
       serialNumber: '',
-      brushingMode: 'clean',
       vibrating: false,
-      profiles: [
-      { id: 12, name: 'user1', ownerProfile: true },
-      { id: 16, name: 'user2', ownerProfile: false },
-    ],
+      firmwareUpdateAvailable: false,
+    },
+    profiles: [],
+    token: null,
   },
+  onLoad(): void | Promise<void> {
+    this.circuitBreaker$ = new Subject();
+    wx.login().then((res) => {
+      Account.signInWithWechat(res.code).then(account => {
+        wx.login().then(({ code }) => {
+          if ('token' in account) {
+            this.setData({
+              token: account.token,
+              code,
+            })
+          } else {
+            setGlobalData({
+              accountId: account.id,
+              profileId: account.owner_profile_id,
+              accessToken: account.access_token,
+            })
 
-  onLoad(){
-    console.log('hello here');
-  },
-  onUnload(){
-    this.stopSearchingToothbrush();
-  },
-  onHide() {
-    this.stopSearchingToothbrush();
+            this.setData({
+              accountId: account.id,
+              profiles: profilesSelector(account)
+            });
+          }
+        })
+      })
+    })
   },
   searchToothbrush() {
     findToothbrushes().subscribe((device) => {
-      console.log('device shadow:', device);
       const { deviceId, deviceName } = device;
       this.setData({
-        toothbrushes: [
-          ...this.data.toothbrushes,
+        toothbrushList: [
+          ...this.data.toothbrushList,
           { deviceId, deviceName }
         ]
       });
       this.deviceShadowList.push(device);
     })
   },
-
-  stopSearchingToothbrush() {
+  handleConnect(e) {
+    const { name, id } = e.currentTarget.dataset;
     stopFindingToothbrushes();
-  },
-
-  handleConnect({currentTarget: {dataset: { id, name }}}) {
-    this.stopSearchingToothbrush();
     const chosenDevice = this.deviceShadowList.find( (device) => device.deviceId === id );
-    createToothbrushWrapperFromDeviceId(
-      chosenDevice.deviceId,
-      {registerInstance: true}
-    ).then((tb) => {
+    createToothbrushWrapper(
+      chosenDevice,
+      true
+    ).then((tb: DefaultToothbrushWrapper) => {
       this.setData({
-        toothbrushes: [],
-        connectionStatus: 'connected',
-        deviceName: name,
-        deviceId: id,
-      })
+        toothbrushList: [],
+        toothbrush: {
+          ...this.data.toothbrush,
+          connectionStatus: 'connected',
+          deviceName: name,
+          deviceId: id,
+        },
+      });
+
+      setGlobalData({
+        tbId: id,
+        tbModel: tb.modelId === ToothbrushModelId.G2 ? 'g2' : 'ce2'
+      });
+
+      tb.serialNumber.getNotifications$()
+        .pipe(takeUntil(this.circuitBreaker$))
+        .subscribe((serialNumber) => {
+        this.setData({
+          toothbrush: {
+            ...this.data.toothbrush,
+            serialNumber,
+          },
+        });
+      });
+      tb.batteryInfo.getNotifications$()
+        .pipe(takeUntil(this.circuitBreaker$))
+        .subscribe(({ batteryLevel }) => {
+        this.setData({
+          toothbrush: {
+            ...this.data.toothbrush,
+            batteryLevel,
+          },
+        });
+      });
+      tb.brushingEvent.getNotifications$()
+        .pipe(takeUntil(this.circuitBreaker$))
+        .subscribe(({ vibratorStatus }) => {
+        this.setData({
+          toothbrush: {
+            ...this.data.toothbrush,
+            vibrating: vibratorStatus,
+          },
+        });
+      });
     });
   },
 
   getSerialNumber() {
-    const wrapper = getToothbrushWrapper(this.data.deviceId) as DefaultToothbrushWrapper;
-    wrapper.serialNumber.fetch().then();
-    wrapper.serialNumber.getNotifications$().subscribe((number) => {
-      this.setData({
-        serialNumber: number
-      })
-    })
-  },
-
-  setBrushingMode() {
-    const wrapper = getToothbrushWrapper(this.data.deviceId) as DefaultToothbrushWrapper;
-    wrapper.brushingMode.fetch();
-    let time = + new Date();
-    wrapper.brushingMode.update({ mode: BrushingMode.WHITENING, timestamp: time });
+    const { deviceId } = this.data.toothbrush;
+    const toothbrush = getToothbrushWrapper(deviceId) as DefaultToothbrushWrapper;
+    toothbrush.serialNumber.fetch();
   },
 
   getBatteryInfo() {
-    const wrapper = getToothbrushWrapper(this.data.deviceId) as DefaultToothbrushWrapper;
-    wrapper.batteryInfo.toggleSubscribe('1');
-    const subscription = wrapper.batteryInfo.getNotifications$().subscribe((info) => {
-      this.setData({
-        batteryInfo: {
-          batteryLevel: info.batteryLevel
-        }
-      })
-    })
-    if( this.data.batteryInfo.batteryLevel !== 0 ) {
-      subscription.unsubscribe();
-    }
+    const { deviceId } = this.data.toothbrush;
+    const toothbrush = getToothbrushWrapper(deviceId) as DefaultToothbrushWrapper;
+    toothbrush.batteryInfo.toggleSubscribe('1');
   },
 
   toggleVibrator() {
-    const wrapper = getToothbrushWrapper(this.data.deviceId) as DefaultToothbrushWrapper;
-    if (this.data.vibrating === false) {
-      wrapper.toggleVibrator.trigger(true);
-      this.setData({
-        vibrating: true
-      })
-    } else {
-      wrapper.toggleVibrator.trigger(false);
-      this.setData({
-        vibrating: false
-      })
-    }
+    const { deviceId } = this.data.toothbrush;
+    const toothbrush = getToothbrushWrapper(deviceId) as DefaultToothbrushWrapper;
+    toothbrush.toggleVibrator.trigger(!this.data.toothbrush.vibrating);
   },
+  signIn(e) {
+    Account.validateWechatEncryptedPhoneNumber({
+      encryptedPhoneNumber: e.detail.encryptedData,
+      initialVector: e.detail.iv,
+      token: this.data.token,
+    }).then((phone) => {
+     return Account.getIsPhoneNumberLinked({ phone_number: phone.phone_number, verification_token: phone.token, verification_code: phone.code })
+       .then(({ wechat_linked, phone_linked }) => {
+         if (!phone_linked && !wechat_linked) {
+           //sign up + associate
+           Account.signUpWithPhoneNumber({
+             phone_number: phone.phone_number,
+             verification_token: phone.token,
+             verification_code: phone.code,
+           }).then((account) => {
+             setGlobalData({
+               accountId: account.id,
+               profileId: account.owner_profile_id,
+               accessToken: account.access_token,
+             })
 
-  signIn() {
-    wx.login().then((res) => {
-      Account.signInWithWechat(res.code).then((account: AccountDetail) => {
-        console.log('account info: ', account);
-        this.setData({
-          profiles: profilesSelector(account)
-        })
-      })
+             this.setData({
+               accountId: account.id,
+               profiles: profilesSelector(account)
+             });
+           }).then(() => {
+             wx.login().then(({ code }) => {
+               Account.linkAccountWithWeChat(code)
+             })
+           })
+         } else if (phone_linked && !wechat_linked) {
+           // associate
+           Account.loginWithPhoneNumber({
+             phone_number: phone.phone_number,
+             verification_token: phone.token,
+             verification_code: phone.code,
+           }).then((account) => {
+             setGlobalData({
+               accountId: account.id,
+               profileId: account.owner_profile_id,
+               accessToken: account.access_token,
+             })
+
+             this.setData({
+               accountId: account.id,
+               profiles: profilesSelector(account)
+             });
+           }).then(() => {
+             wx.login().then(({ code }) => {
+               Account.linkAccountWithWeChat(code)
+             })
+           })
+         }
+       })
     })
   },
   signOut() {
@@ -187,6 +271,57 @@ Page<State, Methods>({
           profiles,
         });
       })
+  },
+  navigateToGuidedBrushing() {
+    wx.navigateTo({
+      url: '/pages/activity/GuidedBrushingMain/index'
+    })
+  },
+  navigateToTestYourAngles() {
+    wx.navigateTo({
+      url: '/pages/activity/TestYourAnglesWelcome/index'
+    })
+  },
+  navigateToMindYourSpeed() {
+    wx.navigateTo({
+      url: '/pages/activity/MindYourSpeedWelcome/index'
+    })
+  },
+  navigateToTestBrushing() {
+    wx.navigateTo({
+      url: '/pages/activity/TestBrushingWelcome/index'
+    })
+  },
+  checkOTAUpdate() {
+    const tbId = getGlobalData('tbId')
+    deviceUpdateManager.checkForUpdate(tbId).then((update) => {
+      console.log('firmware update available: ', update);
+      this.setData({
+        toothbrush: {
+          ...this.data.toothbrush,
+          firmwareUpdateAvailable: update,
+        }
+      })
+    });
+  },
+  startOTAUpdate() {
+    // If firmware update available
+    const tbId = getGlobalData('tbId')
+    const { error$, progress$, status$ } = deviceUpdateManager.getSessionInfo(tbId)
+    error$.subscribe((err) => {
+      console.log('device update error', err);
+    });
+    progress$.subscribe((progress) => {
+      console.log('device update progress: ', progress);
+    });
+    status$.subscribe((status) => {
+      console.log('device update status: ', status)
+    });
+    deviceUpdateManager.startUpdateSession(tbId);
+  },
+  onUnload(): void | Promise<void> {
+    this.circuitBreaker$.next();
+    this.circuitBreaker$.complete();
   }
 });
 

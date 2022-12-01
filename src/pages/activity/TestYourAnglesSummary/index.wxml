@@ -1,0 +1,3 @@
+<test-your-angles-summary>
+  <kl-button type="primary" bind:tap="navigateToHome">Home</kl-button>
+</test-your-angles-summary>

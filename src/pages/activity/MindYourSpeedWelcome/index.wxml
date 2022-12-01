@@ -1,0 +1,4 @@
+<mind-your-speed-welcome
+  bind:mindYourSpeedStart ="handleStartActivity"
+  bind:mindYourSpeedCancel ="handleCancelActivity"
+/>

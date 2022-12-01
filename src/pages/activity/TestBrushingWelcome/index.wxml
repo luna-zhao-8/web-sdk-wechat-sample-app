@@ -1,0 +1,4 @@
+<test-brushing-welcome
+  bind:startTestBrushing ="handleStartActivity"
+  bind:cancelTestBrushing ="handleCancelActivity"
+/>

@@ -1,0 +1,10 @@
+<test-brushing
+  tbModel="{{ tbModel }}"
+  tbId="{{ tbId }}"
+  appInfo="{{ appInfo }}"
+  socketInfo="{{ socketInfo }}"
+  userInfo="{{ userInfo }}"
+  bind:checkTestBrushingResult="handleCheckup"
+  catch:tbConnectionLost="handleTbConnectLost"
+  catch:quitTestBrushing="handleTestBrushingQuit"
+/>

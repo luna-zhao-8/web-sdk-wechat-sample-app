@@ -1,4 +1,5 @@
 {
   "usingComponents": {
+    "kl-jaw": "@kolibree/ui-components-wechat-mini/components/kl-draggable-jaw/index"
   }
 }

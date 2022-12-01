@@ -1,0 +1,8 @@
+<test-your-angles
+  tbModel="{{tbModel}}"
+  tbId="{{tbId}}"
+  socketInfo="{{socketConfig}}"
+  bind:testYourAnglesEnd="handleActivityEnd"
+  bind:quitTestYourAngles="handleActivityEnd"
+  bind:tbConnectionLost="handleTbConnectLost"
+/>

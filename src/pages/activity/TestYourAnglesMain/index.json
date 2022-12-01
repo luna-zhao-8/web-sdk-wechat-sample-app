@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "test-your-angles": "@kolibree/test-your-angles-wechat-mini/components/test-your-angles-main/index"
+  }
+}

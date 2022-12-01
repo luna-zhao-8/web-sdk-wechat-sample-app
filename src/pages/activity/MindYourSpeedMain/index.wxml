@@ -1,0 +1,8 @@
+<mind-your-speed
+  tbModel="{{tbModel}}"
+  tbId="{{tbId}}"
+  socketInfo="{{socketConfig}}"
+  bind:mindYourSpeedEnd="handleActivityEnd"
+  bind:quitMindYourSpeed="handleActivityEnd"
+  bind:tbConnectionLost="handleTbConnectLost"
+/>

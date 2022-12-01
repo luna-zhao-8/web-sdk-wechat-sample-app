@@ -30,7 +30,7 @@ page {
 
 .toothbrushes .item {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .toothbrushes .info {

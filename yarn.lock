@@ -32,6 +32,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.12.0":
+  version: 7.20.6
+  resolution: "@babel/runtime@npm:7.20.6"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 42a8504db21031b1859fbc0f52d698a3d2f5ada9519eb76c6f96a7e657d8d555732a18fe71ef428a67cc9fc81ca0d3562fb7afdc70549c5fec343190cbaa9b03
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -146,6 +155,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kolibree/guided-brushing-wechat-mini@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@kolibree/guided-brushing-wechat-mini@npm:0.1.0::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fguided-brushing-wechat-mini%2F-%2F%40kolibree%2Fguided-brushing-wechat-mini-0.1.0.tgz"
+  dependencies:
+    "@kolibree/ui-components-wechat-mini": ^0.1.1
+    he: ^1.2.0
+  peerDependencies:
+    "@kolibree/activity-service": ^0.1.8
+    "@kolibree/ble-core": ^0.1.4
+    "@kolibree/brushing-activity-utils": ^1.0.3
+    "@kolibree/i18n": ^0.1.3
+    "@kolibree/jaw": ^0.2.2
+    "@kolibree/jaw-wechat": ^0.2.2
+    "@kolibree/local-storage": ^0.1.3
+    "@kolibree/toothbrush-client": ^1.0.3
+    rxjs: ^6.6.7
+  checksum: 36267eab9ae316155ef968398d7ecde5ad5a4796d20e3837dc88181039ffca298667c0c30a6e6b086b5549d0ddfcad9cfa8cbcce160bc0890683b91a552097ef
+  languageName: node
+  linkType: hard
+
+"@kolibree/i18n@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@kolibree/i18n@npm:0.1.3::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fi18n%2F-%2F%40kolibree%2Fi18n-0.1.3.tgz"
+  dependencies:
+    i18next: ^19.4.2
+    moment: ^2.29.1
+  checksum: 64ca6e905490fc6e1173ff2cf092ee36e11e188604cbb23016162b56541b1ea2e202053b308cf927937af707be9031bd3749bc191bd1295d004fa8a5dadacafa
+  languageName: node
+  linkType: hard
+
 "@kolibree/jaw-wechat@npm:^0.2.2":
   version: 0.2.2
   resolution: "@kolibree/jaw-wechat@npm:0.2.2::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fjaw-wechat%2F-%2F%40kolibree%2Fjaw-wechat-0.2.2.tgz"
@@ -172,6 +211,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kolibree/kml@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@kolibree/kml@npm:0.1.3::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fkml%2F-%2F%40kolibree%2Fkml-0.1.3.tgz"
+  dependencies:
+    "@protobufjs/base64": ^1.1.2
+    abab: ^2.0.5
+    jsrsasign: ^10.3.0
+    protobufjs: ^6.10.2
+    tslib: ^2.1.0
+  peerDependencies:
+    "@kolibree/websocket-client": ^0.1.9
+    rxjs: ^6.6.7
+  checksum: b171678407179630cbd3c819a2370de74f77304571a892aacbf355a1a8c552be92ca875fd36e5dcd2885cf0049c5fc98ed4aa6d4fe81fa952c78ede15e5aa6e5
+  languageName: node
+  linkType: hard
+
 "@kolibree/local-storage@npm:^0.1.3":
   version: 0.1.3
   resolution: "@kolibree/local-storage@npm:0.1.3::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Flocal-storage%2F-%2F%40kolibree%2Flocal-storage-0.1.3.tgz"
@@ -179,9 +234,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kolibree/minipack@npm:^1.0.8":
-  version: 1.0.8
-  resolution: "@kolibree/minipack@npm:1.0.8::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fminipack%2F-%2F%40kolibree%2Fminipack-1.0.8.tgz"
+"@kolibree/mind-your-speed-wechat-mini@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@kolibree/mind-your-speed-wechat-mini@npm:0.1.0::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fmind-your-speed-wechat-mini%2F-%2F%40kolibree%2Fmind-your-speed-wechat-mini-0.1.0.tgz"
+  dependencies:
+    "@kolibree/ui-components-wechat-mini": ^0.1.1
+  peerDependencies:
+    "@kolibree/brushing-activity-utils": ^1.0.3
+    "@kolibree/i18n": ^0.1.3
+    rxjs: ^6.6.7
+  checksum: 3e45fe680e1cfd60c48fc2e0693ba760879a6534086e0b0afa8072a87b171ca1306a30c584f67ca4a750a83ea56f1cbd20371e107f7add8d62d7cb6e22fc802c
+  languageName: node
+  linkType: hard
+
+"@kolibree/minipack@npm:^1.0.10-1":
+  version: 1.0.10-1
+  resolution: "@kolibree/minipack@npm:1.0.10-1::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fminipack%2F-%2F%40kolibree%2Fminipack-1.0.10-1.tgz"
   dependencies:
     "@rollup/plugin-alias": ^4.0.2
     "@rollup/plugin-commonjs": ^23.0.2
@@ -205,7 +273,39 @@ __metadata:
     yargs: ^17.1.1
   bin:
     minipack: dist/index.cjs
-  checksum: 56dbb710f0b89a71007dbd16c5f03dd237b3d565b3cf612c1f0306a3e25028f1a9d6bedd39949b0cd483e38df359950a95014739c7fde4b854904690718d1da6
+  checksum: 73ce8c21dbcc46619198ce08d7b09491bc77a20200fc914c140ce23b928f3056317b5c753cc0608e6b9a268467399521967526756a6e2d2b205e8a9a5dc4d40b
+  languageName: node
+  linkType: hard
+
+"@kolibree/test-brushing-wechat-mini@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@kolibree/test-brushing-wechat-mini@npm:0.1.0::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Ftest-brushing-wechat-mini%2F-%2F%40kolibree%2Ftest-brushing-wechat-mini-0.1.0.tgz"
+  dependencies:
+    "@kolibree/ui-components-wechat-mini": ^0.1.1
+  peerDependencies:
+    "@kolibree/brushing-activity-utils": ^1.0.3
+    "@kolibree/i18n": ^0.1.3
+    "@kolibree/jaw": ^0.2.2
+    "@kolibree/jaw-wechat": ^0.2.2
+    "@kolibree/toothbrush-client": ^1.0.3
+    lottie-miniprogram: 1.0.11
+    lottie-web: ^5.7.7
+    rxjs: ^6.6.7
+  checksum: cad7bb1526c7c62cdf004f92b977c1b27f56cbfc24c176389c50d5ba10d5f42f0c2f8b1a8c102a2617b406f09cd07c74e98d0b97206ac099c4baef3239014694
+  languageName: node
+  linkType: hard
+
+"@kolibree/test-your-angles-wechat-mini@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@kolibree/test-your-angles-wechat-mini@npm:0.1.0::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Ftest-your-angles-wechat-mini%2F-%2F%40kolibree%2Ftest-your-angles-wechat-mini-0.1.0.tgz"
+  dependencies:
+    "@kolibree/ui-components-wechat-mini": ^0.1.1
+  peerDependencies:
+    "@kolibree/brushing-activity-utils": ^1.0.3
+    "@kolibree/i18n": ^0.1.3
+    "@kolibree/local-storage": ^0.1.3
+    rxjs: ^6.6.7
+  checksum: f9b9c2b82ca97283c274fda2f552cabb909b0c99bfe81b4a706fd6cc95a5aa92517f715b2d99e613c2d919468b4f411ad9e2f027c713eb508152d52938e2cc54
   languageName: node
   linkType: hard
 
@@ -230,6 +330,19 @@ __metadata:
     "@kolibree/local-storage": ^0.1.3
     rxjs: ^6.6.7
   checksum: 1552f59553d8ae28ae1a1596a5280685b4283c3e9677ae0cac24c40d6f3bdb0bb586a40e0208569433807afd635acf9ebc5bb52d76ba0851d43e0b476948a869
+  languageName: node
+  linkType: hard
+
+"@kolibree/ui-components-wechat-mini@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@kolibree/ui-components-wechat-mini@npm:0.1.1::__archiveUrl=https%3A%2F%2Fkolibree.jfrog.io%2Fartifactory%2Fapi%2Fnpm%2Fweb-sdk-local%2F%40kolibree%2Fui-components-wechat-mini%2F-%2F%40kolibree%2Fui-components-wechat-mini-0.1.1.tgz"
+  dependencies:
+    "@tweenjs/tween.js": ^18.6.4
+  peerDependencies:
+    "@kolibree/jaw": ^0.2.2
+    "@kolibree/jaw-wechat": ^0.2.2
+    rxjs: ^6.6.7
+  checksum: 69a8d4e7f816bc0413903fed1fb56dd56ca55f1ad6bc90b7b47ac533d7b433f7d5d7c6afdb5cb09b5418398df4b5544fa825a1586cb7bcb56fb981cc0e0574e4
   languageName: node
   linkType: hard
 
@@ -479,6 +592,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tweenjs/tween.js@npm:^18.6.4":
+  version: 18.6.4
+  resolution: "@tweenjs/tween.js@npm:18.6.4"
+  checksum: 47208db3f6c32cde80284a852d0fca016284f90c4798eb4ebb2ebfc2e379504007bf0c031c2c33044df8a0878fd1942ebc4e0b7f5b8bcccf812b532ea1ee73eb
+  languageName: node
+  linkType: hard
+
 "@types/estree@npm:*, @types/estree@npm:^1.0.0":
   version: 1.0.0
   resolution: "@types/estree@npm:1.0.0"
@@ -541,14 +661,21 @@ __metadata:
     "@kolibree/ble-core": ^0.1.4
     "@kolibree/ble-wechat-mini": ^0.1.8
     "@kolibree/brushing-activity-utils": ^1.0.3
+    "@kolibree/guided-brushing-wechat-mini": ^0.1.0
+    "@kolibree/i18n": ^0.1.3
     "@kolibree/jaw-wechat": ^0.2.2
-    "@kolibree/kml": ^0.1.2
+    "@kolibree/kml": ^0.1.3
     "@kolibree/local-storage": ^0.1.3
-    "@kolibree/minipack": ^1.0.8
+    "@kolibree/mind-your-speed-wechat-mini": ^0.1.0
+    "@kolibree/minipack": ^1.0.10-1
+    "@kolibree/test-brushing-wechat-mini": ^0.1.0
+    "@kolibree/test-your-angles-wechat-mini": ^0.1.0
     "@kolibree/three-on-wechat": ^0.2.0
     "@kolibree/toothbrush-client": ^1.0.3
+    "@kolibree/ui-components-wechat-mini": ^0.1.1
     "@kolibree/websocket-client": ^0.1.9
     bytebuffer: ^5.0.1
+    lottie-miniprogram: ^1.0.12
     miniprogram-api-typings: ^3.6.0
     rxjs: ^6.6.7
     tslib: ^2.4.1
@@ -1655,6 +1782,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"he@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "he@npm:1.2.0"
+  bin:
+    he: bin/he
+  checksum: 3d4d6babccccd79c5c5a3f929a68af33360d6445587d628087f39a965079d84f18ce9c3d3f917ee1e3978916fc833bb8b29377c3b403f919426f91bc6965e7a7
+  languageName: node
+  linkType: hard
+
 "hmac-drbg@npm:^1.0.1":
   version: 1.0.1
   resolution: "hmac-drbg@npm:1.0.1"
@@ -1700,6 +1836,15 @@ __metadata:
   dependencies:
     ms: ^2.0.0
   checksum: 9c7a74a2827f9294c009266c82031030eae811ca87b0da3dceb8d6071b9bde22c9f3daef0469c3c533cc67a97d8a167cd9fc0389350e5f415f61a79b171ded16
+  languageName: node
+  linkType: hard
+
+"i18next@npm:^19.4.2":
+  version: 19.9.2
+  resolution: "i18next@npm:19.9.2"
+  dependencies:
+    "@babel/runtime": ^7.12.0
+  checksum: a24207707eacb28488975f8921d843bc35b86f2a48504cb82eaf620e1aacddbda8d53a4dc600543a708ba49bc45e61072a753f250e89fad2c1932259190ef81a
   languageName: node
   linkType: hard
 
@@ -2125,6 +2270,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lottie-miniprogram@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "lottie-miniprogram@npm:1.0.12"
+  checksum: 8d006a1feaa34e763ddb05dda81bc8cd043b3f921a49a1f3048403fb8bc29d4951f3bc1460d4f5b8a10f68773db930144144fa5f173cb1b8f4bf0f58389d8e58
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^6.0.0":
   version: 6.0.0
   resolution: "lru-cache@npm:6.0.0"
@@ -2370,6 +2522,13 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.29.1":
+  version: 2.29.4
+  resolution: "moment@npm:2.29.4"
+  checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
   languageName: node
   linkType: hard
 
@@ -2761,6 +2920,13 @@ __metadata:
   dependencies:
     picomatch: ^2.2.1
   checksum: 1ced032e6e45670b6d7352d71d21ce7edf7b9b928494dcaba6f11fba63180d9da6cd7061ebc34175ffda6ff529f481818c962952004d273178acd70f7059b320
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.13.11":
+  version: 0.13.11
+  resolution: "regenerator-runtime@npm:0.13.11"
+  checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
   languageName: node
   linkType: hard
 
